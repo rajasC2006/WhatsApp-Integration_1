@@ -25,6 +25,17 @@ app.get('/webhook', (req, res) => {
 
 // Route for POST requests
 app.post('/webhook', (req, res) => {
+  const { entry } = req.body;
+  const changes = entry[0].changes;
+  const statuses = changes[0].value.statuses
+    ? changes[0].value.statuses[0]
+    : null;
+  const message = changes[0].value.messages
+    ? changes[0].value.messages[0]
+    : null;
+  const name1 = changes[0].value.contacts
+    ? changes[0].value.contacts[0].profile
+    : null;
   const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
   console.log(`\n\nWebhook received ${timestamp}\n`);
   console.log(JSON.stringify(req.body, null, 2));
