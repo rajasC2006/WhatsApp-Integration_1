@@ -36,8 +36,9 @@ app.post('/webhook', (req, res) => {
   const name1 = changes[0].value.contacts
     ? changes[0].value.contacts[0].profile
     : null;
-  const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19);
-  console.log(`\n\nWebhook received ${timestamp}\n`);
+if(statuses)
+  cosole.log(JSON.stringify(statuses,null,2)):
+if(message)
   console.log(JSON.stringify(message, null, 2));
   res.status(200).end();
 });
