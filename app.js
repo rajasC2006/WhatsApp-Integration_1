@@ -41,11 +41,16 @@ app.post('/webhook', (req, res) => {
     : null;
 // if(statuses)
 //   console.log(JSON.stringify(statuses,null,2));
-if(message)
-  console.log(JSON.stringify(message, null, 2));
-  sendCatalog(message.from,name1.name);
-  res.status(200).end();
+if (message?.type === "text") {
+    console.log(JSON.stringify(message, null, 2));
+    sendCatalog(message.from, name1.name);
+  } else {
+    console.log("Full message:", JSON.stringify(req.body, null, 2));
+  }
+
+  res.status(200).end(); // Always end response
 });
+
 
 // Start the server
 app.listen(port, () => {
