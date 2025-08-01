@@ -43,7 +43,7 @@ app.post('/webhook', (req, res) => {
 //   console.log(JSON.stringify(statuses,null,2));
 if(message)
   console.log(JSON.stringify(message, null, 2));
-  sendcatalog(message.from,name1.name);
+  sendCatalog(message.from,name1.name);
   res.status(200).end();
 });
 
