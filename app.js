@@ -48,9 +48,10 @@ if (message?.type === "text") {
     console.log("Full message:", JSON.stringify(message, null, 2));
   }
 
-if (message?.type.toLowerCase() === "order"){
+if ((message?.type?.toLowerCase?.()) === "order") {
   console.log(JSON.stringify(message,null,2));
-  sendVendorList(
+  sendVendorList(message.from, name1.name);
+} 
   res.status(200).end(); // Always end response
 });
 
