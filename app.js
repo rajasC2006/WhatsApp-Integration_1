@@ -45,9 +45,12 @@ if (message?.type === "text") {
     console.log(JSON.stringify(message, null, 2));
     sendCatalog(message.from, name1.name);
   } else {
-    console.log("Full message:", JSON.stringify(req.body, null, 2));
+    console.log("Full message:", JSON.stringify(message, null, 2));
   }
 
+if (message?.type.toLowerCase() === "order"){
+  console.log(JSON.stringify(message,null,2));
+  sendVendorList(
   res.status(200).end(); // Always end response
 });
 
@@ -81,3 +84,49 @@ async function sendCatalog(to, name1) {
     }),
   });
 }
+
+async function sendVendorList(to, name1) {
+  await axios({
+    url: `${URL}`,
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to,
+      type: "interactive",
+      interactive: {
+        type: "list",
+        header:{
+          type:"text",
+          text: `Hello ${name1}, please Select the Vendor for you items`
+        },
+        body:{
+          text:"Your Items"
+        },
+        footer:{
+          text:"Click Cancel if you wish to cancel the Order"
+        },
+        action:{
+          button:"Vendor List",
+          sections:[
+            {
+              title:"Vendor Name",
+              rows:[
+                {
+                  id:"1",
+                  title:"Haldiram's",
+                  description:"Vendor Contact Number"
+                }
+              ]
+            }
+          ]
+        }
+      },
+    }),
+  });
+}
+
