@@ -44,9 +44,10 @@ app.post('/webhook', (req, res) => {
 if (message?.type === "text") {
     console.log(JSON.stringify(message, null, 2));
     sendCatalog(message.from, name1.name);
-  } else {
-    console.log("Full message:", JSON.stringify(message, null, 2));
-  }
+   } 
+//else {
+  //   console.log("Full message:", JSON.stringify(message, null, 2));
+  // }
 
 if ((message?.type?.toLowerCase?.()) === "order") {
   console.log(JSON.stringify(message,null,2));
