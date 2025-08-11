@@ -198,10 +198,10 @@ async function senditemsList6(to, name1) {
         type: "list",
         header:{
           type:"text",
-          text: `Hello ${name1}, Please click the below button for items list`
+          text: `Hello ${name1}.`
         },
         body:{
-          text:"Hi"
+          text:"Please click below button for items list"
         },
         footer:{
           text:""
