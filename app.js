@@ -216,7 +216,8 @@ async function senditemsList1(to, category) {
                                 { product_retailer_id: "1025" },
                                 { product_retailer_id: "1021" },
                                 { product_retailer_id: "1017" },
-                                { product_retailer_id: "1016" }
+                                { product_retailer_id: "1016" },
+                                { product_retailer_id: "20165" }
                             ]
                         }
                     ]
