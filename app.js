@@ -43,18 +43,18 @@ app.post('/webhook', (req, res) => {
 //   console.log(JSON.stringify(statuses,null,2));
 if (message?.type === "text") {
     console.log(JSON.stringify(message, null, 2));
-    sendCatalog(message.from, name1.name);
+    sendVendorList(message.from, name1.name);
    } 
 //else {
   //   console.log("Full message:", JSON.stringify(message, null, 2));
   // }
 
-if ((message?.type?.toLowerCase?.()) === "order") {
-  console.log(JSON.stringify(message,null,2));
-  sendVendorList(message.from, name1.name);
-} 
-  res.status(200).end(); // Always end response
-});
+// if ((message?.type?.toLowerCase?.()) === "order") {
+//   console.log(JSON.stringify(message,null,2));
+//   sendVendorList(message.from, name1.name);
+// } 
+//   res.status(200).end(); // Always end response
+// });
 
 
 // Start the server
@@ -104,31 +104,76 @@ async function sendVendorList(to, name1) {
         type: "list",
         header:{
           type:"text",
-          text: `Hello ${name1}, please Select the Vendor for you items`
+          text: `Hello ${name1}, please Select the Category.`
         },
         body:{
-          text:"Your Items"
+          text:""
         },
         footer:{
-          text:"Click Cancel if you wish to cancel the Order"
+          text:""
         },
         action:{
-          button:"Vendor List",
+          button:"Select Category",
           sections:[
             {
-              title:"Vendor Name",
+              title:"Select Category",
               rows:[
                 {
                   id:"1",
-                  title:"Haldiram's",
-                  description:"Vendor Contact Number"
+                  title:"Clothing & Apparel",
+                  description:""
+                },
+                {
+                  id:"2",
+                  title:"Electronics & Gadgets",
+                  description:""
+                },
+                {
+                  id:"3",
+                  title:"Home & Kitchen",
+                  description:""
+                },
+                {
+                  id:"4",
+                  title:"Groceries & Food",
+                  description:""
+                },
+                {
+                  id:"5",
+                  title:"Beauty & Personal Care",
+                  description:""
+                },
+                {
+                  id:"6",
+                  title:"Health & Wellness",
+                  description:""
+                },
+                {
+                  id:"7",
+                  title:"Sports & Fitness",
+                  description:""
+                },
+                {
+                  id:"8",
+                  title:"Books & Stationery",
+                  description:""
+                },
+                {
+                  id:"9",
+                  title:"Toys & Games",
+                  description:""
+                },
+                {
+                  id:"10",
+                  title:"Automotive & Accessories",
+                  description:""
                 }
               ]
             }
           ]
         }
+        
       },
     }),
   });
 }
-
