@@ -40,15 +40,20 @@ app.post('/webhook', (req, res) => {
     ? changes[0].value.contacts[0].profile
     : null;
 
-  if (message?.type === "text") {
+if (message?.type === "text") {
     console.log(JSON.stringify(message, null, 2));
-    sendVendorList(message.from, name1.name);
+    sendCategoryList(message.from, name1.name);
   }
-  else
-    {
-    console.log(JSON.stringify(req.body,null,2));
-  }
+//   else
+//     {
+//     console.log(JSON.stringify(req.body,null,2));
+//   }
 
+if(message?.type =="interactive"){
+    if(message?.interactive?.list_reply?.id =="6"){
+        senditemsList6(message.from,name1.name)
+    }
+}
   // Always end the response
   res.status(200).end();
 });
@@ -85,7 +90,7 @@ async function sendCatalog(to, name1) {
   });
 }
 
-async function sendVendorList(to, name1) {
+async function sendCategoryList(to, name1) {
   await axios({
     url: `${URL}`,
     method: "post",
@@ -175,3 +180,95 @@ async function sendVendorList(to, name1) {
     }),
   });
 }
+
+async function senditemsList6(to, name1) {
+  await axios({
+    url: `${URL}`,
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to,
+      type: "interactive",
+      interactive: {
+        type: "list",
+        header:{
+          type:"text",
+          text: `Hello ${name1}, Please click the below button for items list`
+        },
+        body:{
+          text:"Hi"
+        },
+        footer:{
+          text:""
+        },
+        action:{
+          button:"Health & Wellness",
+          sections:[
+            {
+              title:"Health & Wellness",
+              rows:[
+                {
+                  id:"1",
+                  title:"Yoga mats",
+                  description:""
+                },
+                {
+                  id:"2",
+                  title:"Dumbbells & resistance bands",
+                  description:""
+                },
+                {
+                  id:"3",
+                  title:"Herbal supplements",
+                  description:""
+                },
+                {
+                  id:"4",
+                  title:"Protein powders & shakes",
+                  description:""
+                },
+                {
+                  id:"5",
+                  title:"Essential oils & diffusers",
+                  description:""
+                },
+                {
+                  id:"6",
+                  title:"Massage rollers & therapy balls",
+                  description:""
+                },
+                {
+                  id:"7",
+                  title:"Fitness trackers & smartwatches",
+                  description:""
+                },
+                {
+                  id:"8",
+                  title:"First-aid kits",
+                  description:""
+                },
+                {
+                  id:"9",
+                  title:"Vitamins & multivitamins",
+                  description:""
+                },
+                {
+                  id:"10",
+                  title:"Water bottles & hydration gear",
+                  description:""
+                }
+              ]
+            }
+          ]
+        }
+        
+      },
+    }),
+  });
+}
+
