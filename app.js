@@ -101,7 +101,7 @@ async function sendVendorList(to, name1) {
           text: `Hello ${name1}, please Select the Category.`
         },
         body:{
-          text:""
+          text:"Hi"
         },
         footer:{
           text:""
