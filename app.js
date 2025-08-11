@@ -39,22 +39,16 @@ app.post('/webhook', (req, res) => {
   const name1 = changes[0].value.contacts
     ? changes[0].value.contacts[0].profile
     : null;
-// if(statuses)
-//   console.log(JSON.stringify(statuses,null,2));
-if (message?.type === "text") {
+
+  if (message?.type === "text") {
     console.log(JSON.stringify(message, null, 2));
     sendVendorList(message.from, name1.name);
-   } 
-//else {
-  //   console.log("Full message:", JSON.stringify(message, null, 2));
-  // }
+  }
 
-// if ((message?.type?.toLowerCase?.()) === "order") {
-//   console.log(JSON.stringify(message,null,2));
-//   sendVendorList(message.from, name1.name);
-// } 
-//   res.status(200).end(); // Always end response
-// });
+  // Always end the response
+  res.status(200).end();
+});
+
 
 
 // Start the server
@@ -176,4 +170,4 @@ async function sendVendorList(to, name1) {
       },
     }),
   });
-}}
+}
