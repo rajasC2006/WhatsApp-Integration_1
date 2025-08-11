@@ -176,4 +176,4 @@ async function sendVendorList(to, name1) {
       },
     }),
   });
-}
+}}
