@@ -45,7 +45,7 @@ app.post('/webhook', (req, res) => {
     sendVendorList(message.from, name1.name);
   }
   else{
-    consoe.log(JSON.stringify(message,null,2));
+    console.log(JSON.stringify(message,null,2));
   }
 
   // Always end the response
