@@ -210,7 +210,7 @@ async function senditemsList6(to, name1) {
           button:"Health & Wellness",
           sections:[
             {
-              title:"Health & Wellness",
+              title:"Health&Wellness",
               rows:[
                 {
                   id:"1",
