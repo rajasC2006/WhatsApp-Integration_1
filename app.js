@@ -51,7 +51,7 @@ app.post('/webhook', (req, res) => {
 
     if (message?.type == "interactive") {
         if (message?.interactive?.list_reply?.id == "1") {
-            senditemsList6(message.from,message.list_reply.title)
+            senditemsList1(message.from,message.list_reply.title)
         }
     }
     // Always end the response
