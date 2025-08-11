@@ -210,7 +210,7 @@ async function senditemsList6(to, name1) {
           button:"Health & Wellness",
           sections:[
             {
-              title:"Health&Wellness",
+              title:"Health & Wellness",
               rows:[
                 {
                   id:"1",
@@ -219,7 +219,7 @@ async function senditemsList6(to, name1) {
                 },
                 {
                   id:"2",
-                  title:"Dumbbells & resistance bands",
+                  title:"Dumbbells",
                   description:""
                 },
                 {
@@ -229,22 +229,22 @@ async function senditemsList6(to, name1) {
                 },
                 {
                   id:"4",
-                  title:"Protein powders & shakes",
+                  title:"Protein powders",
                   description:""
                 },
                 {
                   id:"5",
-                  title:"Essential oils & diffusers",
+                  title:"Essential oils",
                   description:""
                 },
                 {
                   id:"6",
-                  title:"Massage rollers & therapy balls",
+                  title:"Massage rollers",
                   description:""
                 },
                 {
                   id:"7",
-                  title:"Fitness trackers & smartwatches",
+                  title:"Fitness trackers",
                   description:""
                 },
                 {
@@ -254,12 +254,12 @@ async function senditemsList6(to, name1) {
                 },
                 {
                   id:"9",
-                  title:"Vitamins & multivitamins",
+                  title:"Multivitamins",
                   description:""
                 },
                 {
                   id:"10",
-                  title:"Water bottles & hydration gear",
+                  title:"Water bottles",
                   description:""
                 }
               ]
