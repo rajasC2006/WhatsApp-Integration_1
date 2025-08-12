@@ -13,7 +13,7 @@ const WHATSAPP_ACCESS_TOKEN =
 const port = process.env.PORT || 3000;
 const URL = "https://graph.facebook.com/v22.0/645746375298493/messages"
 const verifyToken = process.env.VERIFY_TOKEN;
-
+const productname={"1020": "SOLDERING WIRE 60/40 ROSIN FINEPremium Cotton Shirt"};
 // Route for GET requests
 app.get('/webhook', (req, res) => {
     const { 'hub.mode': mode, 'hub.challenge': challenge, 'hub.verify_token': token } = req.query;
@@ -48,6 +48,11 @@ app.post('/webhook', (req, res) => {
         {
         console.log(JSON.stringify(req.body,null,2));
       }
+    if (message?.type === "order") {
+    const productId = message.order.product_items[0].product_retailer_id;
+    const articleName = productMap[productId] || "Unknown Product";
+    sendvendorList(message?.from,articleName)
+    }
 
     if (message?.type == "interactive") {
         if (message?.interactive?.list_reply?.id == "1") {
@@ -216,8 +221,7 @@ async function senditemsList1(to, category) {
                                 { product_retailer_id: "1025" },
                                 { product_retailer_id: "1021" },
                                 { product_retailer_id: "1017" },
-                                { product_retailer_id: "1016" },
-                                { product_retailer_id: "20165" }
+                                { product_retailer_id: "1016" }
                             ]
                         }
                     ]
@@ -227,3 +231,45 @@ async function senditemsList1(to, category) {
     });
 }
 
+async function sendvendorList(to, articleName) {
+    await axios({
+        url: `${URL}`,
+        method: "post",
+        headers: {
+            Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to,
+  type: "interactive",
+  interactive: {
+    type: "list",
+    header: {
+      type: "text",
+      text: "Vendors for your selected product"
+    },
+    body: {
+      text: `${articleName}`
+    },
+    footer: {
+      text: "Powered by ShopBot"
+    },
+    action: {
+      button: "Select Vendor",
+      sections: [
+        {
+          title: "Vendors",
+          rows: [
+            { id: "vendor_1", title: "Vendor A", description: "Fast shipping, COD available" },
+            { id: "vendor_2", title: "Vendor B", description: "Lowest price guarantee" },
+            { id: "vendor_3", title: "Vendor C", description: "Premium quality" }
+          ]
+        }
+      ]
+    }
+  }
+}),
+    });
+}
