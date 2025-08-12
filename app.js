@@ -44,10 +44,10 @@ app.post('/webhook', (req, res) => {
         console.log(JSON.stringify(message, null, 2));
         sendCategoryList(message.from, name1.name);
     }
-    //   else
-    //     {
-    //     console.log(JSON.stringify(req.body,null,2));
-    //   }
+      else
+        {
+        console.log(JSON.stringify(req.body,null,2));
+      }
 
     if (message?.type == "interactive") {
         if (message?.interactive?.list_reply?.id == "1") {
