@@ -50,7 +50,7 @@ app.post('/webhook', (req, res) => {
       }
     if (message?.type === "order") {
     const productId = message.order.product_items[0].product_retailer_id;
-    const articleName = productMap[productId] || "Unknown Product";
+    const articleName = productname[productId] || "Unknown Product";
     sendvendorList(message?.from,articleName)
     }
 
