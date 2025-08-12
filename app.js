@@ -14,6 +14,7 @@ const port = process.env.PORT || 3000;
 const URL = "https://graph.facebook.com/v22.0/645746375298493/messages"
 const verifyToken = process.env.VERIFY_TOKEN;
 const productname={"1020": "SOLDERING WIRE 60/40 ROSIN FINEPremium Cotton Shirt"};
+const productids=["1020", "1025", "1021", "1017", "1016"]
 // Route for GET requests
 app.get('/webhook', (req, res) => {
     const { 'hub.mode': mode, 'hub.challenge': challenge, 'hub.verify_token': token } = req.query;
@@ -187,6 +188,9 @@ async function sendCategoryList(to, name1) {
 }
 
 async function senditemsList1(to, category) {
+    const productItems = productids.map(id => ({
+        product_retailer_id: id
+    }));
     await axios({
         url: `${URL}`,
         method: "post",
@@ -216,13 +220,7 @@ async function senditemsList1(to, category) {
                     sections: [
                         {
                             title: "Products",
-                            product_items: [
-                                { product_retailer_id: "1020" },
-                                { product_retailer_id: "1025" },
-                                { product_retailer_id: "1021" },
-                                { product_retailer_id: "1017" },
-                                { product_retailer_id: "1016" }
-                            ]
+                            product_items: productItems
                         }
                     ]
                 }
