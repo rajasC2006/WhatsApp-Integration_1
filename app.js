@@ -13,7 +13,7 @@ const WHATSAPP_ACCESS_TOKEN =
 const port = process.env.PORT || 3000;
 const URL = "https://graph.facebook.com/v22.0/645746375298493/messages"
 const verifyToken = process.env.VERIFY_TOKEN;
-const productname={"1020": "SOLDERING WIRE 60/40 ROSIN FINEPremium Cotton Shirt"};
+const productname={"1020": "SOLDERING WIRE 60/40 ROSIN FINE Premium Cotton Shirt"};
 const productids=["1020", "1025", "1021", "1017", "1016"]
 // Route for GET requests
 app.get('/webhook', (req, res) => {
@@ -56,8 +56,9 @@ app.post('/webhook', (req, res) => {
     }
 
     if (message?.type == "interactive") {
-        if (message?.interactive?.list_reply?.id == "1") {
-            senditemsList1(message.from,message.interactive.list_reply.title)
+        if (message?.interactive?.list_reply) {
+            //senditemsList1(message.from,message.interactive.list_reply.title)
+            console.log(JSON.stringify(message.interactive,list_reply.title));
         }
     }
     // Always end the response
