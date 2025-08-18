@@ -65,6 +65,12 @@ app.post('/webhook', async(req, res) => {
         if (message?.interactive?.button_reply?.id=="browse_category") {
             sendCategoryList(message.from,name1.name)
         }
+        if (message?.interactive?.nfm_reply?.response_json) {
+            const responseJson = message.interactive.nfm_reply.response_json;
+            const parsedResponse = JSON.parse(responseJson);
+            const productName = parsedResponse.screen_0_Product_Name_0;
+            console.log("✅ User searched for product:", productName);
+        }
     }
     // Always end the response
     res.status(200).end();
