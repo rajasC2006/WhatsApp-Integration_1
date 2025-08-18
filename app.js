@@ -58,7 +58,7 @@ app.post('/webhook', async(req, res) => {
     }
 
     if (message?.type == "interactive") {
-        if (message?.interactive?.list_reply) {
+        if (message?.interactive?.list_reply?.id=="1") {
             senditemsList1(message.from,message.interactive.list_reply.title)
             //console.log(JSON.stringify(message.interactive.list_reply.title));
         }
