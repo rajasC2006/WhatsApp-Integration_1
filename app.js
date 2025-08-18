@@ -371,7 +371,7 @@ async function senditemsList2(to,productkeyword) {
             interactive: {
                 header: {
                     type: "text",
-                    text: `${category}`
+                    text: `${productkeyword}`
                 },
                 type: "product_list",
                 body: {
