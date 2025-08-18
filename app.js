@@ -47,10 +47,10 @@ app.post('/webhook', async(req, res) => {
         await new Promise(resolve => setTimeout(resolve, 1000));
         sendReplyButtons(message.from);
     }
-      else
-        {
-        console.log(JSON.stringify(req.body,null,2));
-      }
+    //   else
+    //     {
+    //     console.log(JSON.stringify(req.body,null,2));
+    //   }
     if (message?.type === "order") {
     const productId = message.order.product_items[0].product_retailer_id;
     const articleName = productname[productId] || "Unknown Product";
@@ -76,31 +76,7 @@ app.post('/webhook', async(req, res) => {
 app.listen(port, () => {
     console.log(`\nListening on port ${port}\n`);
 });
-async function sendCatalog(to, name1) {
-    await axios({
-        url: `${URL}`,
-        method: "post",
-        headers: {
-            Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
-            "Content-Type": "application/json",
-        },
-        data: JSON.stringify({
-            messaging_product: "whatsapp",
-            to,
-            type: "interactive",
-            interactive: {
-                type: "catalog_message",
-                body: {
-                    text: `Hello ${name1},Welcome to TechB's Shopping Experience.\n\nTo start shopping, you can view our catalog and add items to purchase.
-          \n\n*You can directly place your order on WhatsApp chat🥳🥳.* \n\nClick the View Catalog button to start shopping.`,
-                },
-                action: {
-                    name: "catalog_message",
-                },
-            },
-        }),
-    });
-}
+
 
 async function sendCategoryList(to, name1) {
     await axios({
