@@ -44,7 +44,8 @@ app.post('/webhook', async(req, res) => {
     if (message?.type === "text") {
         console.log(JSON.stringify(message, null, 2));
         searchproducts(message.from);
-        await sendReplyButtons(message.from);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        sendReplyButtons(message.from);
     }
       else
         {
