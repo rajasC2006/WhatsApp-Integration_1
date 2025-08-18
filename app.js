@@ -70,6 +70,8 @@ app.post('/webhook', async(req, res) => {
             const parsedResponse = JSON.parse(responseJson);
             const productName = parsedResponse.screen_0_Product_Name_0;
             console.log("✅ User searched for product:", productName);
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            senditemsList2(message.from,productName)
         }
     }
     // Always end the response
@@ -348,4 +350,42 @@ async function searchproducts(to) {
   },
 }),
   });
+}
+
+async function senditemsList2(to,productkeyword) {
+    const productItems = productids.map(id => ({
+        product_retailer_id: id
+    }));
+    await axios({
+        url: `${URL}`,
+        method: "post",
+        headers: {
+            Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+            "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to,
+            type: "interactive",
+            interactive: {
+                type: "product_list",
+                body: {
+                    text: `Your items for keyword ${productkeyword} `
+                },
+                footer: {
+                    text: ""
+                },
+                action: {
+                    catalog_id: "708631082000623",
+                    sections: [
+                        {
+                            title: "Products",
+                            product_items: productItems
+                        }
+                    ]
+                }
+            }
+        }),
+    });
 }
