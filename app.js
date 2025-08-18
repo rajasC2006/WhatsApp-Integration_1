@@ -43,7 +43,8 @@ app.post('/webhook', (req, res) => {
 
     if (message?.type === "text") {
         console.log(JSON.stringify(message, null, 2));
-        sendCategoryList(message.from, name1.name);
+        searchproducts(message.from);
+        sendReplyButtons(message.from);
     }
       else
         {
@@ -57,13 +58,13 @@ app.post('/webhook', (req, res) => {
 
     if (message?.type == "interactive") {
         if (message?.interactive?.list_reply) {
-            senditemsList1(message.from,message.interactive.list_reply.title)
+            //senditemsList1(message.from,message.interactive.list_reply.title)
             console.log(JSON.stringify(message.interactive.list_reply.title));
         }
     }
     // Always end the response
     res.status(200).end();
-});
+}); 
 
 
 
@@ -271,4 +272,94 @@ async function sendvendorList(to, articleName) {
   }
 }),
     });
+}
+
+async function sendReplyButtons(to) {
+  //debugger;
+  await axios({
+    url: `${URL}`,
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+      messaging_product: "whatsapp",
+      to,
+      type: "interactive",
+      interactive: {
+        type: "button",
+        header: {
+          type: "text",
+          text: "Hello",
+        },
+        body: {
+          text: "Hope you are doing well!",
+        },
+        footer: {
+          text: "Please select anyone",
+        },
+        action: {
+          buttons: [
+            {
+              type: "reply",
+              reply: {
+                id: "browse_category",
+                title: "Browse Categories",
+              },
+            },
+            {
+              type: "reply",
+              reply: {
+                id: "view_cart",
+                title: "View Cart",
+              },
+            },
+          ],
+        },
+      },
+    }),
+  });
+}
+
+async function searchproducts(to) {
+  //debugger;
+  await axios({
+    url: `${URL}`,
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${WHATSAPP_ACCESS_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    data: JSON.stringify({
+  messaging_product: "whatsapp",
+  to: "9022666166",
+  type: "interactive",
+  interactive: {
+    type: "flow",
+    header: {
+      type: "text",
+      text: "Hi",
+    },
+    body: {
+      text: "Search for products by entering a keyword.",
+    },
+    footer: {
+      text: "Click the button below to Search",
+    },
+    action: {
+      name: "flow",
+      parameters: {
+        flow_message_version: "3",
+        flow_id: "2304896149927204", // replace with your flow_id
+        flow_cta: "Search Products",
+        flow_action: "navigate",
+        flow_action_payload: {
+          screen: "SEARCH",
+        },
+      },
+    },
+  },
+}),
+  });
 }
