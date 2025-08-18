@@ -28,7 +28,7 @@ app.get('/webhook', (req, res) => {
 });
 
 // Route for POST requests
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async(req, res) => {
     const { entry } = req.body;
     const changes = entry[0].changes;
     const statuses = changes[0].value.statuses
@@ -43,8 +43,8 @@ app.post('/webhook', (req, res) => {
 
     if (message?.type === "text") {
         console.log(JSON.stringify(message, null, 2));
-        searchproducts(message.from);
-        sendReplyButtons(message.from);
+        await searchproducts(message.from);
+        await sendReplyButtons(message.from);
     }
       else
         {
