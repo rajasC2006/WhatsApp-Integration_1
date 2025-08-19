@@ -68,6 +68,7 @@ app.post('/webhook', async(req, res) => {
         if (message?.interactive?.nfm_reply?.response_json) {
             const responseJson = message.interactive.nfm_reply.response_json;
             const parsedResponse = JSON.parse(responseJson);
+            console.log(parsedResponse)
             const productName = parsedResponse.screen_0_Product_Name_0;
             console.log("✅ User searched for product:", productName);
             await new Promise(resolve => setTimeout(resolve, 1000));
